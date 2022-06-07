@@ -20,45 +20,69 @@ Methods:
 
 namespace Movement
 {
-	class SimpleBall : SpriteNode
-	{
-		// your private fields here
+  class SimpleBall : SpriteNode
+  {
+    // your private fields here
+
+    private float xspeed = 600;
+    private float yspeed = 600;
+    private float scr_width = Settings.ScreenSize.X;
+    private float scr_height = Settings.ScreenSize.Y;
 
 
-		// constructor + call base constructor
-		public SimpleBall() : base("resources/bigball.png")
-		{
-			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 4);
-			Color = Color.YELLOW;
-		}
 
-		// Update is called every frame
-		public override void Update(float deltaTime)
-		{
-			Move(deltaTime);
-			BounceEdges();
-		}
+    // constructor + call base constructor
+    public SimpleBall() : base("resources/bigball.png")
+    {
+      Position = new Vector2(scr_width / 2, scr_height / 4);
+      Color = Color.YELLOW;
+    }
 
-		// your own private methods
-		private void Move(float deltaTime)
-		{
-			// TODO implement
-			// Position.X += 200 * deltaTime;
-		}
+    // Update is called every frame
+    public override void Update(float deltaTime)
+    {
 
-		private void BounceEdges()
-		{
-			float scr_width = Settings.ScreenSize.X;
-			float scr_height = Settings.ScreenSize.Y;
-			float spr_width = TextureSize.X;
-			float spr_heigth = TextureSize.Y;
+      Move(deltaTime);
+      BounceEdges();
+    }
 
-			// TODO implement...
-			if (Position.X > scr_width)
-			{
-				// ...
-			}
-		}
+    // your own private methods
 
-	}
+
+
+    private void Move(float deltaTime)
+    {
+      // TODO implement
+      Position.X = Position.X + xspeed * deltaTime;
+      Position.Y = Position.Y + yspeed * deltaTime;
+    }
+
+    private void BounceEdges()
+    {
+
+      float spr_width = TextureSize.X;
+      float spr_height = TextureSize.Y;
+
+      // TODO implement...
+      switch (Position.X)
+      {
+        case float x when x > scr_width:
+          xspeed = -xspeed;
+          break;
+        case float x when x < 0:
+          xspeed = -xspeed;
+          break;
+      }
+      switch (Position.Y)
+      {
+        case float y when y > scr_height:
+          yspeed = -yspeed;
+          break;
+        case float y when y < 0:
+          yspeed = -yspeed;
+          break;
+      }
+    }
+
+  }
 }
