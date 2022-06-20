@@ -25,7 +25,7 @@ namespace Movement
     // your private fields here (add Velocity, Acceleration, and MaxSpeed)
     private Vector2 Velocity;
     private Vector2 Acceleration = new Vector2(0.06f, -0.03f);
-    private float MaxSpeed = 1600;
+    private float maxSpeed = 1600;
 
     // constructor + call base constructor
     public AcceleratingBall() : base("resources/ball.png")
@@ -39,7 +39,7 @@ namespace Movement
     {
       Move(deltaTime);
       WrapEdges();
-      if (Velocity.Length() > MaxSpeed)
+      if (Velocity.Length() > maxSpeed)
       {
         Acceleration = new Vector2(0, 0);
       }
@@ -57,8 +57,6 @@ namespace Movement
     {
       float scr_width = Settings.ScreenSize.X;
       float scr_height = Settings.ScreenSize.Y;
-      float spr_width = TextureSize.X;
-      float spr_heigth = TextureSize.Y;
 
       // TODO implement...
       if (Position.X > scr_width)

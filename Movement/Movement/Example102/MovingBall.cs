@@ -50,8 +50,6 @@ namespace Movement
     {
       float scr_width = Settings.ScreenSize.X;
       float scr_height = Settings.ScreenSize.Y;
-      float spr_width = TextureSize.X;
-      float spr_heigth = TextureSize.Y;
 
       // TODO implement...
       switch (Position.X)
