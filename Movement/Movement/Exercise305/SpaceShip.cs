@@ -21,71 +21,47 @@ Methods:
 
 namespace Movement
 {
-	class SpaceShip : SpriteNode
-	{
-		// your private fields here (rotSpeed, thrustForce)
-		private float rotSpeed;
-		// private float thrustForce;
+  class SpaceShip : SpriteNode
+  {
+    // your private fields here (rotSpeed, thrustForce)
+    private Vector2 Acceleration;
+    private float rotSpeed;
+    private float thrustForce;
 
-		// constructor + call base constructor
-		public SpaceShip() : base("resources/spaceship.png")
-		{
-			rotSpeed = (float)Math.PI; // rad/second
-			// thrustForce = 500;
+    // constructor + call base constructor
+    public SpaceShip() : base("resources/spaceship.png")
+    {
+      rotSpeed = (float)Math.PI; // rad/second
+      thrustForce = 500;
 
-			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
-			Color = Color.YELLOW;
-		}
+      Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
+      Color = Color.YELLOW;
+    }
 
-		// Update is called every frame
-		public override void Update(float deltaTime)
-		{
-			Move(deltaTime);
-			WrapEdges();
-		}
+    public void RotateRight(float deltaTime)
+    {
+      Rotation += rotSpeed * deltaTime;
+    }
 
-		// your own private methods
-		private void Move(float deltaTime)
-		{
-			// TODO implement
-			// Position += Velocity * deltaTime;
-		}
+    public void RotateLeft(float deltaTime)
+    {
+      Rotation -= rotSpeed * deltaTime;
+    }
 
-		private void WrapEdges()
-		{
-			float scr_width = Settings.ScreenSize.X;
-			float scr_height = Settings.ScreenSize.Y;
-			float spr_width = TextureSize.X;
-			float spr_heigth = TextureSize.Y;
+    public void Thrust()
+    {
+      // TODO implement
+      Color = Color.ORANGE;
+      // use thrustForce somewhere here
+      float x = thrustForce * MathF.Cos(Convert.ToSingle(Rotation));
+      float y = thrustForce * MathF.Sin(Convert.ToSingle(Rotation));
+      Acceleration = new Vector2(x, y);
+    }
 
-			// TODO implement...
-			if (Position.X > scr_width)
-			{
-				// ...
-			}
-		}
+    public void NoThrust()
+    {
+      Color = Color.YELLOW;
+    }
 
-		public void RotateRight(float deltaTime)
-		{
-			Rotation += rotSpeed * deltaTime;
-		}
-
-		public void RotateLeft(float deltaTime)
-		{
-			Rotation -= rotSpeed * deltaTime;
-		}
-
-		public void Thrust()
-		{
-			// TODO implement
-			Color = Color.ORANGE;
-			// use thrustForce somewhere here
-		}
-
-		public void NoThrust()
-		{
-			Color = Color.YELLOW;
-		}
-
-	}
+  }
 }
