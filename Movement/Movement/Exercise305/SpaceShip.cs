@@ -4,39 +4,41 @@ using Raylib_cs; // Color
 
 /*
 In this class, we have the properties:
-
 - Vector2  Position
 - float    Rotation
 - Vector2  Scale
-
 - Vector2 TextureSize
 - Vector2 Pivot
 - Color Color
-
 Methods:
-
 - AddChild(Node child)
 - RemoveChild(Node child, bool keepAlive = false)
 */
 
 namespace Movement
 {
-  class SpaceShip : SpriteNode
+  class SpaceShip : MoverNode
   {
     // your private fields here (rotSpeed, thrustForce)
-    private Vector2 Acceleration;
     private float rotSpeed;
     private float thrustForce;
-
-    // constructor + call base constructor
     public SpaceShip() : base("resources/spaceship.png")
     {
       rotSpeed = (float)Math.PI; // rad/second
-      thrustForce = 500;
+      thrustForce = 100;
 
       Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
       Color = Color.YELLOW;
     }
+
+    // Update is called every frame
+    public override void Update(float deltaTime)
+    {
+      Move(deltaTime);
+
+    }
+
+    // your own private methods
 
     public void RotateRight(float deltaTime)
     {
@@ -51,10 +53,10 @@ namespace Movement
     public void Thrust()
     {
       // TODO implement
-      Color = Color.ORANGE;
+      Color = Color.RED;
       // use thrustForce somewhere here
-      float x = thrustForce * MathF.Cos(Convert.ToSingle(Rotation));
-      float y = thrustForce * MathF.Sin(Convert.ToSingle(Rotation));
+      float x = thrustForce * MathF.Cos((float)(Rotation));
+      float y = thrustForce * MathF.Sin((float)(Rotation));
       Acceleration = new Vector2(x, y);
     }
 
